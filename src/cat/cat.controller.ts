@@ -8,7 +8,6 @@ export class CatController {
     return request.query
   }
   @Post()
-  // @HttpCode(201)
   create(@Req() request: Request): object {
     return request.body
   }
