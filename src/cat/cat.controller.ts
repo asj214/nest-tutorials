@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Req, Param, Query, HttpCode } from '@nestjs/common';
 import { Request } from 'express';
 import { CatService } from './cat.service';
+import { Cat } from './cat.entity';
 
 @Controller('cats')
 export class CatController {
@@ -11,14 +12,17 @@ export class CatController {
   }
   @Post()
   create(@Req() request: Request): object {
-    return request.body
+    const { name, age } = request.body;
+    return this.catService.create(
+      name, age
+    );
   }
   @Get(':id')
-  findOne(@Param('id') id): any {
-    return id;
+  async findOne(@Param('id') id): Promise<Cat> {
+    return await this.catService.findOne(id);
   }
   @Put(':id')
-  update(@Param('id') id,@Req() request: Request): object {
+  update(@Param('id') id, @Req() request: Request): object {
     const resp = {
       id: id,
       body: request.body

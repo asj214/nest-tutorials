@@ -1,4 +1,4 @@
-@BASE_URL = http://localhost:3000
+@BASE_URL = http://localhost:8080
 
 ###
 GET {{ BASE_URL }}
@@ -6,34 +6,33 @@ Content-Type: application/json
 
 
 ###
-GET {{ BASE_URL }}/cats?page=1&per_page=10
+GET {{ BASE_URL }}/boards?page=1&per_page=10
 Content-Type: application/json
 
 
 ###
-POST {{ BASE_URL }}/cats
-Content-Type: application/json
-
-{
-  "name": "sjahn",
-  "age": 5
-}
-
-###
-GET {{ BASE_URL }}/cats/1
-Content-Type: application/json
-
-
-###
-PUT {{ BASE_URL }}/cats/1
+POST {{ BASE_URL }}/boards
 Content-Type: application/json
 
 {
-  "name": "nero",
-  "age": 123
+  "title": "test123123123",
+  "body": "asdsadsadsadsadsadsdsad"
+}
+
+###
+GET {{ BASE_URL }}/boards/1
+Content-Type: application/json
+
+
+###
+PUT {{ BASE_URL }}/boards/1
+Content-Type: application/json
+
+{
+  "title": "제목 변경 2222"
 }
 
 
 ###
-DELETE {{ BASE_URL }}/cats/1
+DELETE {{ BASE_URL }}/boards/2
 Content-Type: application/json
