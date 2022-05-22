@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getRepository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { Board } from './entities/board.entity';
@@ -20,7 +20,7 @@ export class BoardService {
   }
 
   async findAll() {
-    const qb = await getRepository(Board).createQueryBuilder('boards');
+    const qb = this.boardRepository.createQueryBuilder('boards');
 
     qb.where("1 = 1");
     qb.orderBy('boards.id', 'DESC');
