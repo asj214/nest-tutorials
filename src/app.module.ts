@@ -6,12 +6,14 @@ import { CatController } from './cat/cat.controller';
 import { CatService } from './cat/cat.service';
 import { CatModule } from './cat/cat.module';
 import { BoardModule } from './board/board.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
     CatModule,
-    BoardModule
+    BoardModule,
+    UserModule
   ],
   controllers: [AppController, CatController],
   providers: [AppService, CatService],
