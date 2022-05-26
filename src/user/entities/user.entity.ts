@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, BeforeInsert } from "typeorm";
 import { IsEmail } from 'class-validator';
 import * as argon2 from 'argon2';
 
@@ -17,7 +17,7 @@ export class UserEntity {
   @Column()
   password: string;
 
-  @Column({ name: 'last_login_at' })
+  @Column({ name: 'last_login_at', nullable: true })
   lastLoginAt: Date;
 
   @CreateDateColumn({ name: 'created_at' })
@@ -25,6 +25,9 @@ export class UserEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deletedAt: Date;
 
   @BeforeInsert()
   async hashPassword() {

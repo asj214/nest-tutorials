@@ -5,15 +5,54 @@ GET {{ BASE_URL }}
 Content-Type: application/json
 
 ###
-POST {{ BASE_URL }}/users
+GET {{ BASE_URL }}/users
+Content-Type: application/json
+
+###
+# @name authentication
+POST {{ BASE_URL }}/users/login
 Content-Type: application/json
 
 {
   "email": "asj214@naver.com",
+  "password": "rewq1234"
+}
+
+###
+@token = {{ authentication.response.body.token }}
+
+###
+GET {{ BASE_URL }}/users/me
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+
+###
+POST {{ BASE_URL }}/users
+Content-Type: application/json
+
+{
+  "email": "asj111@naver.com",
   "name": "sjahn",
   "password": "rewq1234"
 }
 
+###
+GET {{ BASE_URL }}/users/5
+Content-Type: application/json
+
+
+###
+PUT {{ BASE_URL }}/users/5
+Content-Type: application/json
+
+{
+  "email": "ahnsb214@gmail.com"
+}
+
+###
+DELETE {{ BASE_URL }}/users/4
+Content-Type: application/json
 
 ###
 GET {{ BASE_URL }}/boards?page=1&per_page=10
