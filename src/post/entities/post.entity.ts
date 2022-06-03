@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, RelationId } from "typeorm";
 import { Exclude } from 'class-transformer';
 import { UserEntity } from "src/user/entities/user.entity";
 
@@ -9,7 +9,7 @@ export class PostEntity {
 
   @ManyToOne(type => UserEntity, user => user.posts)
   @JoinColumn({ name: "user_id" })
-  user: Promise<UserEntity>;
+  user: UserEntity;
 
   @Column()
   title: string;

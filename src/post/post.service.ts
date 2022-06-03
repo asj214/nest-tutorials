@@ -29,7 +29,7 @@ export class PostService {
 
   async findAll() {
     const resp = await this.postRepository.findAndCount({
-      // relations: ['user'],
+      relations: ['user'],
       // loadEagerRelations: true,
       order: {
         ['id']: 'DESC'
@@ -37,7 +37,7 @@ export class PostService {
     });
 
     // return resp;
-    // return { resp[0], resp[1] };
+    return { count: resp[1], results: resp[0] };
 
   }
 
