@@ -18,7 +18,10 @@ export class PostService {
   async create(userId: number, createPostDto: CreatePostDto) {
     const post = new PostEntity({ ...createPostDto });
     const newPost = await this.postRepository.save(post);
-    const user = await this.userRepository.findOne({ where: { id: userId }, relations: ['posts'] });
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['posts']
+    });
 
     user.posts.push(post);
 
@@ -36,9 +39,7 @@ export class PostService {
       }
     });
 
-    // return resp;
     return { count: resp[1], results: resp[0] };
-
   }
 
   async findOne(id: number): Promise<PostEntity> {
@@ -51,7 +52,12 @@ export class PostService {
     return new PostEntity(post);
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
+  async update(id: number, updatePostDto: UpdatePostDto) {
+    const post = await this.postRepository.findOne({
+      relations: ['user'],
+      where: { id: id } 
+    });
+
     return `This action updates a #${id} post`;
   }
 
